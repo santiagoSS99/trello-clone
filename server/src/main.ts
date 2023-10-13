@@ -3,11 +3,20 @@ import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common/services';
 import { OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
 import { Server } from 'socket.io';
+import { ValidationPipe } from '@nestjs/common';
 
 const APP_PORT = process.env.APP_PORT || 3000
 
 async function app() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api');
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    })
+  )
   await app.listen(APP_PORT, ()=> console.log(`Listening on PORT:${APP_PORT}`));
 }
 app();

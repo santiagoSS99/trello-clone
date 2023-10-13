@@ -4,18 +4,18 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 export class User {
 
     @PrimaryGeneratedColumn()
-    id: string
+    id: string;
 
     @Column("varchar", { length: 200 })
-    email: string
+    email: string;
     
     @Column('text', {
         select: false
     })
-    password: string
+    password: string;
 
     @Column('text')
-    name: string
+    name: string;
     
     @Column('text')
     last_name: string
@@ -23,8 +23,8 @@ export class User {
     @Column('boolean', {
         default: true
     })
-    isActive: boolean
+    isActive: boolean;
 
     @Column('simple-array',{nullable: true})
-    roles: string[]
+    roles: string[];
 }
